@@ -1,0 +1,23 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Dependencies
+node_modules
+.pnp
+.pnp.*
+.yarn/*
+
+*.tsbuildinfo
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem

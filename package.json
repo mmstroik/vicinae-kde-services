@@ -1,0 +1,46 @@
+{
+  "name": "kde-system-settings",
+  "title": "KDE System Settings",
+  "description": "Search and open KDE System Settings modules directly from Vicinae",
+  "categories": [
+    "Productivity"
+  ],
+  "license": "MIT",
+  "author": "milo",
+  "contributors": [],
+  "pastContributors": [],
+  "icon": "extension_icon.png",
+  "commands": [
+    {
+      "name": "search-settings",
+      "title": "Search System Settings",
+      "subtitle": "KDE",
+      "description": "Search and open KDE System Settings modules",
+      "mode": "view"
+    }
+  ],
+  "preferences": [],
+  "scripts": {
+    "build": "vici build",
+    "dev": "vici develop",
+    "format": "prettier --write .",
+    "lint": "eslint . --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@vicinae/api": "^0.14.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.37.0",
+    "@types/node": "^22.18.8",
+    "@types/react": "^19.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "eslint": "^9.37.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.4.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.45.0"
+  }
+}
