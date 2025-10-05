@@ -28,56 +28,46 @@ function parseDesktopFile(filePath: string): KCMModule | null {
     let moduleId = '';
     let execCommand = '';
 
-    // Parse the desktop file
     for (const line of lines) {
-      // Get the base Name (English version)
       if (line.startsWith('Name=') && !line.includes('[')) {
         name = line.substring(5).trim();
       }
-      // Get Comment (description)
       else if (line.startsWith('Comment=') && !line.includes('[')) {
         description = line.substring(8).trim();
       }
-      // Get Icon
       else if (line.startsWith('Icon=')) {
         icon = line.substring(5).trim();
       }
-      // Get Keywords
       else if (line.startsWith('X-KDE-Keywords=') && !line.includes('[')) {
         const keywordStr = line.substring(15).trim();
         keywords = keywordStr.split(',').map(k => k.trim()).filter(k => k.length > 0);
       }
-      // Get module ID from X-KDE-Library
       else if (line.startsWith('X-KDE-Library=')) {
         moduleId = line.substring(14).trim();
       }
-      // Get exec command
       else if (line.startsWith('Exec=')) {
         execCommand = line.substring(5).trim();
       }
     }
 
-    // Skip if no name
     if (!name) return null;
 
-    // Determine the module ID and command
     let finalModuleId = '';
     let finalCommand = '';
 
     if (execCommand.includes('systemsettings')) {
-      // Modern format: "systemsettings kcm_modulename"
+      // modern KDE6: "systemsettings kcm_modulename"
       const parts = execCommand.split(/\s+/);
       if (parts.length > 1 && parts[1]) {
         finalModuleId = parts[1];
         finalCommand = execCommand;
       }
     } else if (moduleId) {
-      // Legacy format with X-KDE-Library
+      // legacy KDE5: uses X-KDE-Library
       finalModuleId = moduleId;
       finalCommand = `kcmshell6 ${moduleId}`;
     }
 
-    // Skip if we couldn't determine how to launch it
     if (!finalModuleId) return null;
 
     return {
@@ -98,7 +88,7 @@ function loadKCMModules(): KCMModule[] {
   const modules: KCMModule[] = [];
   const seen = new Set<string>();
 
-  // Check modern location: /usr/share/applications/kcm_*.desktop
+  // KDE6 location
   const applicationsDir = '/usr/share/applications';
   if (existsSync(applicationsDir)) {
     try {
@@ -118,7 +108,7 @@ function loadKCMModules(): KCMModule[] {
     }
   }
 
-  // Check legacy location: /usr/share/kservices5/*.desktop
+  // KDE5 location
   const kservices5Dir = '/usr/share/kservices5';
   if (existsSync(kservices5Dir)) {
     try {
@@ -138,7 +128,6 @@ function loadKCMModules(): KCMModule[] {
     }
   }
 
-  // Sort alphabetically by name
   modules.sort((a, b) => a.name.localeCompare(b.name));
 
   return modules;
@@ -163,7 +152,6 @@ export default function SearchSettings(props: LaunchProps) {
     setIsLoading(false);
   }, []);
 
-  // Filter modules based on search text
   const filteredModules = modules.filter((module: KCMModule) => {
     if (!searchText) return true;
 
