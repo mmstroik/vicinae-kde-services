@@ -14,7 +14,8 @@ export async function openKCMModule(
       message: "Launching KDE System Settings",
     });
 
-    await execAsync(command, { timeout: 20000 });
+    // launch in background, detach from terminal, and discard output
+    await execAsync(`nohup ${command} > /dev/null 2>&1 &`, { timeout: 5000 });
 
     await showToast({
       title: "Success",
