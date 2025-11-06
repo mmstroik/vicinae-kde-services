@@ -39,7 +39,7 @@ async function loadKCMDescriptions(): Promise<Map<string, string>> {
 
 function parseDesktopFile(
   filePath: string,
-  descriptionsMap: Map<string, string>
+  descriptionsMap: Map<string, string>,
 ): KCMModule | null {
   try {
     const content = readFileSync(filePath, "utf-8");
@@ -93,7 +93,9 @@ function parseDesktopFile(
     } else if (moduleId) {
       finalModuleId = moduleId;
       finalCommand = `kcmshell6 ${moduleId}`;
-      isKDE5 = moduleId.includes("systemsettings_qwidgets") || moduleId.includes("kf5/");
+      isKDE5 =
+        moduleId.includes("systemsettings_qwidgets") ||
+        moduleId.includes("kf5/");
     }
 
     if (!finalModuleId) return null;
@@ -108,11 +110,15 @@ function parseDesktopFile(
       return null;
     }
 
-    if (filePath.includes("/kservices5/") || filePath.includes("/kservices6/")) {
+    if (
+      filePath.includes("/kservices5/") ||
+      filePath.includes("/kservices6/")
+    ) {
       isKDE5 = true;
     }
 
-    const finalDescription = descriptionsMap.get(finalModuleId) || description || name;
+    const finalDescription =
+      descriptionsMap.get(finalModuleId) || description || name;
 
     return {
       id: finalModuleId,
