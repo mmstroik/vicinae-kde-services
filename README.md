@@ -1,26 +1,31 @@
-# KDE system settings vicinae extension
+# KDE System Settings
 
-search and open KDE system settings modules directly from vicinae.
+Search and open KDE System Settings modules directly from Vicinae.
 
-## installation
+## Features
+
+- Automatically discovers all available KDE settings modules on your system
+- Works with both KDE5 and KDE6
+- Search by module name, description, or keywords
+- Copy module IDs or full commands to clipboard
+- Can be enabled as a fallback command for root search
+
+## Usage
+
+1. Search for "KDE settings" or "search system settings" in Vicinae to browse or search for all available KDE settings modules.
+2. Press Enter or click to open the module
+3. Use copy actions to get module IDs or commands
+
+### Enable as root fallback command
+
+1. Search for "Configure Fallback Commands" in Vicinae
+2. Enable "Search System Settings"
+3. KDE settings modules will now appear in root search results
+
+## Development
 
 ```bash
-pnpm install
-pnpm run build
-```
-
-## usage
-
-search for the "search system settings" command in vicinae to search/browse all available KDE settings modules.
-
-to enable it as a fallback command (to use the root search query as the search input):
-
-1. search for "configure fallback commands" in vicinae
-2. enable "Search System Settings"
-3. now searching for KDE settings modules will be a fallback option in the root search
-
-## development
-
-```bash
-pnpm run dev
+bun install
+bun run build
+bun run dev
 ```

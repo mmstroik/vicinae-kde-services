@@ -1,12 +1,13 @@
 {
+  "$schema": "https://raw.githubusercontent.com/vicinaehq/vicinae/refs/heads/main/extra/schemas/extension.json",
   "name": "kde-system-settings",
   "title": "KDE System Settings",
   "description": "Search and open KDE System Settings modules directly from Vicinae",
   "categories": [
-    "Productivity"
+    "System"
   ],
   "license": "MIT",
-  "author": "milo",
+  "author": "mmstroik",
   "contributors": [],
   "pastContributors": [],
   "icon": "extension_icon.png",
@@ -24,21 +25,17 @@
     "build": "vici build",
     "dev": "vici develop",
     "format": "prettier --write .",
-    "lint": "eslint . --ext .ts,.tsx",
+    "lint": "eslint . --ext .ts,.tsx && vici lint",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@vicinae/api": "^0.14.1"
+    "@vicinae/api": "^0.16.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.37.0",
     "@types/node": "^22.18.8",
-    "@types/react": "^19.2.0",
-    "@typescript-eslint/eslint-plugin": "^8.45.0",
-    "@typescript-eslint/parser": "^8.45.0",
+    "@types/react": "^19.0.10",
     "eslint": "^9.37.0",
-    "eslint-plugin-react": "^7.37.5",
-    "globals": "^16.4.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.45.0"
