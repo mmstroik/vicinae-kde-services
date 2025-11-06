@@ -1,18 +1,38 @@
-import { ActionPanel, Action, List, LaunchProps, Icon } from "@vicinae/api";
+import {
+  ActionPanel,
+  Action,
+  List,
+  LaunchProps,
+  Icon,
+  getPreferenceValues,
+} from "@vicinae/api";
 import { useState, useEffect } from "react";
 import { openKCMModule } from "./utils/open-module-command";
 import { loadKCMModules, type KCMModule } from "./utils/module-loader";
+
+interface Preferences {
+  showKDE5Modules: boolean;
+}
 
 export default function SearchSettings(props: LaunchProps) {
   const [modules, setModules] = useState<KCMModule[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchText, setSearchText] = useState(props.fallbackText || "");
+  const preferences = getPreferenceValues<Preferences>();
 
   useEffect(() => {
-    const loadedModules = loadKCMModules();
-    setModules(loadedModules);
-    setIsLoading(false);
-  }, []);
+    const loadModules = async () => {
+      const loadedModules = await loadKCMModules();
+      const filteredModules = preferences.showKDE5Modules
+        ? loadedModules
+        : loadedModules.filter((m) => !m.isKDE5);
+
+      setModules(filteredModules);
+      setIsLoading(false);
+    };
+
+    loadModules();
+  }, [preferences.showKDE5Modules]);
 
   const filteredModules = modules.filter((module: KCMModule) => {
     if (!searchText) return true;
