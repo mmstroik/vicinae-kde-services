@@ -1,6 +1,6 @@
 import { ActionPanel, Action, List, LaunchProps, Icon } from "@vicinae/api";
 import { useState, useEffect } from "react";
-import { openKCMModule } from "./utils/command-executor";
+import { openKCMModule } from "./utils/open-module-command";
 import { loadKCMModules, type KCMModule } from "./utils/module-loader";
 
 export default function SearchSettings(props: LaunchProps) {

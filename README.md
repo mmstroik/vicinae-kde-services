@@ -19,8 +19,8 @@ Search and open KDE System Settings modules directly from Vicinae.
 ### Enable as root fallback command
 
 1. Search for "Configure Fallback Commands" in Vicinae
-2. Enable "Search System Settings"
-3. KDE settings modules will now appear in root search results
+2. Enable "Search KDE System Settings"
+3. The option to use the root search query as the search input for KDE settings modules will now appear in the root search results
 
 ## Development
 

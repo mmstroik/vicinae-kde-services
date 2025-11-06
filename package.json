@@ -13,10 +13,10 @@
   "icon": "extension_icon.png",
   "commands": [
     {
-      "name": "search-settings",
-      "title": "Search System Settings",
+      "name": "search-kde-settings",
+      "title": "Search KDE System Settings",
       "subtitle": "KDE",
-      "description": "Search and open KDE System Settings modules",
+      "description": "List, search, and open KDE System Settings modules",
       "mode": "view"
     }
   ],
